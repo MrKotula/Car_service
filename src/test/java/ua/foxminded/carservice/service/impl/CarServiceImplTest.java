@@ -121,4 +121,11 @@ class CarServiceImplTest {
 
         assertEquals(listOfCarsDto, carService.getCarsByCategory("Sedan"));
     }
+
+    @Test
+    void shouldDeleteCarWhenUseMethodDeleteCarByIdTest() {
+        carService.deleteCarById("cptB1C1NSL");
+
+        verify(carRepository).deleteById("cptB1C1NSL");
+    }
 }

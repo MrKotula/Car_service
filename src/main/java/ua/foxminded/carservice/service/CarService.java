@@ -16,4 +16,10 @@ public interface CarService {
     List<CarDto> getCarsByYear(int year);
 
     List<CarDto> getCarsByCategory(String category);
+
+    List<CarDto> getAllCars();
+
+    void updateCar(CarDto carDto);
+
+    void deleteCarById(String carId);
 }
