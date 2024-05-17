@@ -20,7 +20,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarDto getCarById(String carId) {
-        Car car = carRepository.findById(carId).get();
+        Car car = carRepository.findById(carId).orElse(null);
 
         return carMapper.transformCarToDto(car);
     }
@@ -56,5 +56,30 @@ public class CarServiceImpl implements CarService {
         List<Car> listOfCars = carRepository.findCarByCategory(category);
 
         return carMapper.transformCarListToCarDtoList(listOfCars);
+    }
+
+    @Override
+    public List<CarDto> getAllCars() {
+        List<Car> listOfCars = carRepository.findAll();
+
+        return carMapper.transformCarListToCarDtoList(listOfCars);
+    }
+
+    @Override
+    public void updateCar(CarDto carDto) {
+        Car updatedCar = Car.builder()
+                .carId(carDto.getCarId())
+                .brand(carDto.getBrand())
+                .model(carDto.getModel())
+                .year(carDto.getYear())
+                .category(carDto.getCategory())
+                .build();
+
+        carRepository.save(updatedCar);
+    }
+
+    @Override
+    public void deleteCarById(String carId) {
+        carRepository.deleteById(carId);
     }
 }
