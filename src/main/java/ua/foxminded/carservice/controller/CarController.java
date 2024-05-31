@@ -3,6 +3,7 @@ package ua.foxminded.carservice.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ public class CarController {
     private final CarService carService;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('app_admin', 'app_user')")
     public ResponseEntity<List<CarDto>> getAllCars() {
         List<CarDto> cars = carService.getAllCars();
 
@@ -30,6 +32,7 @@ public class CarController {
     }
 
     @GetMapping("/{carId}")
+    @PreAuthorize("hasAnyRole('app_admin', 'app_user')")
     public ResponseEntity<CarDto> getCarById(@PathVariable String carId) {
         CarDto car = carService.getCarById(carId);
 
@@ -41,6 +44,7 @@ public class CarController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('app_admin')")
     public ResponseEntity<List<CarDto>> saveNewCars(@RequestBody List<CarDto> cars) {
         List<CarDto> savedCars = carService.getAllCars();
 
@@ -48,11 +52,13 @@ public class CarController {
     }
 
     @PutMapping("/{carId}")
+    @PreAuthorize("hasRole('app_admin')")
     public void updateCar(@PathVariable String carId, @RequestBody CarDto carDto) {
         carService.updateCar(carDto);
     }
 
     @DeleteMapping("/{carId}")
+    @PreAuthorize("hasRole('app_admin')")
     public void deleteCarById(@PathVariable String carId) {
         carService.deleteCarById(carId);
     }
