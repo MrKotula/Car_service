@@ -22,9 +22,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeHttpRequests()
-                .anyRequest()
-                .authenticated();
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers(
+                                "/car-service-app/swagger-ui/**",
+                                "/car-service-app/v3/**",
+                                "/car-service-app/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
+                        ).permitAll()
+                        .anyRequest().authenticated());
 
         http
                 .oauth2ResourceServer()

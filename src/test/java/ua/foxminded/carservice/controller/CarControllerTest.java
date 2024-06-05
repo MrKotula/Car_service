@@ -56,7 +56,6 @@ class CarControllerTest {
                 .andExpect(status().isNotFound());
     }
 
-
     @Test
     @WithMockUser(authorities = "ROLE_app_user")
     void shouldReturnListCarDtoWhenUseGetAllCarsTest() throws Exception {
