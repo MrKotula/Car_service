@@ -24,6 +24,8 @@
         <jacoco-plugin.version>0.8.10</jacoco-plugin.version>
         <testcontainers.version>1.19.1</testcontainers.version>
         <keycloak.version>23.0.4</keycloak.version>
+        <keycloak-adapter-bom.version>10.0.0</keycloak-adapter-bom.version>
+        <springdoc-openapi-webmvc-api.version>2.5.0</springdoc-openapi-webmvc-api.version>
     </properties>
 
     <dependencies>
@@ -103,6 +105,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi-webmvc-api.version}</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -110,7 +118,7 @@
             <dependency>
                 <groupId>org.keycloak.bom</groupId>
                 <artifactId>keycloak-adapter-bom</artifactId>
-                <version>10.0.0</version>
+                <version>${keycloak-adapter-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
