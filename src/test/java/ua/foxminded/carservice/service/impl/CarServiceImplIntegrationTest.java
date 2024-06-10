@@ -87,9 +87,9 @@ class CarServiceImplIntegrationTest {
     void shouldReturnListCarDtoWhenUseMethodGetCarsByYearTest() {
         List<CarDto> listOfCarsDto = new ArrayList<>();
 
-        CarDto testCarCadillac = new CarDto("ElhqsRZDnP", "Cadillac", "Escalade ESV", 2020, "SUV");
+        CarDto testCarAudi = new CarDto("ZRgPP9dBMm", "Audi", "Q3", 2020, "SUV");
 
-        listOfCarsDto.add(testCarCadillac);
+        listOfCarsDto.add(testCarAudi);
 
         assertEquals(listOfCarsDto.get(0), carService.getCarsByYear(2020).get(0));
     }
@@ -98,9 +98,9 @@ class CarServiceImplIntegrationTest {
     void shouldReturnListCarDtoWhenUseMethodGetCarsByCategoryTest() {
         List<CarDto> listOfCarsDto = new ArrayList<>();
 
-        CarDto testCarCadillac = new CarDto("ElhqsRZDnP", "Cadillac", "Escalade ESV", 2020, "SUV");
+        CarDto testCarAudi = new CarDto("ZRgPP9dBMm", "Audi", "Q3", 2020, "SUV");
 
-        listOfCarsDto.add(testCarCadillac);
+        listOfCarsDto.add(testCarAudi);
 
         assertEquals(listOfCarsDto.get(0), carService.getCarsByCategory("SUV").get(0));
     }
@@ -109,9 +109,9 @@ class CarServiceImplIntegrationTest {
     void shouldReturnListCarDtoWhenUseMethodGetAllCarsTest() {
         List<CarDto> listOfCarsDto = new ArrayList<>();
 
-        CarDto testCarCadillac = new CarDto("ElhqsRZDnP", "Cadillac", "Escalade ESV", 2020, "SUV");
+        CarDto testCarAudi = new CarDto("ZRgPP9dBMm", "Audi", "Q3", 2020, "SUV");
 
-        listOfCarsDto.add(testCarCadillac);
+        listOfCarsDto.add(testCarAudi);
 
         assertEquals(listOfCarsDto.get(0), carService.getAllCars().get(0));
     }
