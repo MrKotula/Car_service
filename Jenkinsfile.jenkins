@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+
+    tools {
+        maven "Maven 3.9.7"
+        git "Git"
+    }
+
+    environment {
+        GITLAB_REPO = 'https://git.foxminded.ua/foxstudent103483/carservice.git'
+        GITLAB_CREDENTIALS_ID = '13d14699-417c-41ed-985f-a670fcc6f201'
+    }
+
+    stages {
+        stage('Clone repository') {
+            steps {
+                script {
+                    checkout scmGit(branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[credentialsId: GITLAB_CREDENTIALS_ID, url: GITLAB_REPO]])
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    bat "mvn clean install"
+                }
+            }
+        }
+
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('Sonar-instance') {
+                    bat "mvn sonar:sonar"
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+                    steps {
+                        script {
+                        bat 'docker build -t carservice-app .'
+                        }
+                    }
+                }
+
+        stage('Run docker-compose') {
+                            steps {
+                                script {
+                                bat 'docker-compose up'
+                                }
+                            }
+                        }
+    }
+}
