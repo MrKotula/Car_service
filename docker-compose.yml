@@ -8,6 +8,8 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - keycloak_network
 
   keycloak:
     image: quay.io/keycloak/keycloak:23.0.4
@@ -19,7 +21,9 @@ services:
       - KEYCLOAK_ADMIN_PASSWORD=admin
     volumes:
       - ${HOME}/docker_volumes/keycloak:/opt/keycloak/data/import
-    command: [ "start-dev", "--import-realm" ]
+    command: ["start-dev", "--import-realm"]
+    networks:
+      - keycloak_network
 
   carservice:
     build:
